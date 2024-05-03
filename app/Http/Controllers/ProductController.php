@@ -56,4 +56,18 @@ class ProductController extends Controller
         }
         return response()->json(['data dengan id (' . $id . ')tidak di  temukan']);
     }
+
+
+    public function delete ($id)
+    {
+        $product = Product::findOrFail($id);
+        
+        if ($product) {
+            Product::where('id', $id)->delete();
+            return response()->json([
+               'message' => 'Data berhasil dihapus'
+            ])->setStatusCode(200);
+        }
+        return response()->json(['data dengan id (' . $id . ')tidak di  temukan']);
+    }
 }
