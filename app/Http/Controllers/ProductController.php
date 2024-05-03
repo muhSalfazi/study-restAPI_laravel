@@ -34,6 +34,8 @@ class ProductController extends Controller
         ])->setStatusCode(201);
     }
 
+   
+    
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -73,7 +75,7 @@ class ProductController extends Controller
 
     public function restore($id)
     {
-        $product = Product::onlyTrashed()->where('id', $id)->first(); // Add first() to get the actual model instance
+        $product = Product::onlyTrashed()->where('id', $id)->first(); 
         if ($product) {
             $product->restore();
             return response()->json("Data dengan ID:{$id} berhasil dipulihkan", 200);
@@ -82,5 +84,14 @@ class ProductController extends Controller
         }
     }
 
+    public function show(Request $request, $id)
+    {
+        $product = Product::find($id);
 
+        if (!$product) {
+            return response()->json(['message' => 'Product not found'], 404);
+        }
+
+        return response()->json($product);
+    }
 }
