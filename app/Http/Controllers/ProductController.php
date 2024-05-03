@@ -70,4 +70,17 @@ class ProductController extends Controller
         }
         return response()->json(['data dengan id (' . $id . ')tidak di  temukan']);
     }
+
+    public function restore($id)
+    {
+        $product = Product::onlyTrashed()->where('id', $id)->first(); // Add first() to get the actual model instance
+        if ($product) {
+            $product->restore();
+            return response()->json("Data dengan ID:{$id} berhasil dipulihkan", 200);
+        } else {
+            return response()->json("Data dengan ID:{$id} tidak ditemukan", 404);
+        }
+    }
+
+
 }
