@@ -33,4 +33,27 @@ class ProductController extends Controller
             'message' => 'Data berhasil disimpan'
         ])->setStatusCode(201);
     }
+
+    public function update(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'product_name' => 'sometimes|max:50',
+            'product_type' => 'sometimes|in:snack,drink,fruit',
+            'product_price' => 'sometimes|numeric',
+            'expired_at' => 'sometimes|date'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->messages())->setStatusCode(422);
+        }
+        $valid = $validator->validated();
+        $product = Product::findOrFail($id);
+        if ($product) {
+            Product::where('id', $id)->update($valid);
+            return response()->json([
+                'message' => 'Data berhasil diupdate'
+            ])->setStatusCode(200);
+        }
+        return response()->json(['data dengan id (' . $id . ')tidak di  temukan']);
+    }
 }
