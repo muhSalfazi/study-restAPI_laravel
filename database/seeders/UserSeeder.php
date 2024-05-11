@@ -17,16 +17,16 @@ class UserSeeder extends Seeder
     public function run()
     {
         // Memasukkan data pengguna manual
-        // User ::create([
-        //     'name' => 'administrator',
-        //     'email' => 'admin@gmail.com',
-        //     'role' => 'admin',
-        //     'status' => 'aktif',
-        //     'last_login' => now(),
-        //     'password' => Hash::make('password123')
-        // ]);
+        User ::create([
+            'name' => 'administrator',
+            'email' => 'admin@gmail.com',
+            // 'role' => 'admin',
+            // 'status' => 'aktif',
+            // 'last_login' => now(),
+            'password' => Hash::make('admin')
+        ]);
 
         // Memasukkan data pengguna menggunakan factory
-        User::factory()->count(50)->create();
+        // User::factory()->count(10)->create();
     }
 }

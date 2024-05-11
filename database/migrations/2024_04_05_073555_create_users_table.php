@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('email_validate')->nullable();
             $table->enum('status',['aktif','non-aktif'])->default('non-aktif');
-            $table->dateTime('last_login');
-              $table->timestamps(); 
+            $table->dateTime('last_login')->nullable()->default(null);
+            $table->timestamps(); 
             
             
         });

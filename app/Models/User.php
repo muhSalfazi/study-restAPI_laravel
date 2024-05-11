@@ -17,10 +17,10 @@ class User extends Authenticatable
     'nama',
     'email',
     'password',
-    'role',
-    'email_validate',
-    'status',
-    'last_login'
+    // 'role',
+    // 'email_validate',
+    // 'status',
+    // 'last_login'
 ];
 
 

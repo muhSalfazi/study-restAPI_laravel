@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController; // Tambahkan use statement untuk ProductController
 use App\Http\Controllers\ProductController; // Tambahkan use statement untuk ProductController
 
 
@@ -27,3 +28,6 @@ Route::put('product/{id}',[ProductController::class,'update']);
 Route::delete('product/{id}',[ProductController::class,'delete']);
 Route::delete('product/{id}/restore',[ProductController::class,'restore']);
 Route::get('/product/{id}', [ProductController::class,'show']);
+
+// tes user JWT
+Route::post('/login', [UserController::class, 'login']);
