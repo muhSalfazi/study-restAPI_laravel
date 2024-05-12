@@ -94,4 +94,11 @@ class ProductController extends Controller
 
         return response()->json($product);
     }
+
+    public function showAll()
+    {
+        $products = Product::all();
+        return response()->json($products);
+    }
+
 }

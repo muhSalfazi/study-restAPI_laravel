@@ -24,10 +24,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/product',[ProductController::class,'store']);
 
-Route::put('product/{id}',[ProductController::class,'update']);
-Route::delete('product/{id}',[ProductController::class,'delete']);
-Route::delete('product/{id}/restore',[ProductController::class,'restore']);
-Route::get('/product/{id}', [ProductController::class,'show']);
+// Route::put('product/{id}',[ProductController::class,'update']);
+// Route::delete('product/{id}',[ProductController::class,'delete']);
+// Route::delete('product/{id}/restore',[ProductController::class,'restore']);
+// Route::get('/product/{id}', [ProductController::class,'show']);
 
-// tes user JWT
+// route untuk login
 Route::post('/login', [UserController::class, 'login']);
+
+Route::middleware(['jwt-auth'])->group(function () {
+    // route untuk menambahkan data produk
+    Route::put('product/{id}', [ProductController::class, 'update']);
+    Route::delete('product/{id}', [ProductController::class, 'delete']);
+    Route::delete('product/{id}/restore', [ProductController::class, 'restore']);
+    Route::get('/product/{id}', [ProductController::class, 'show']);
+    Route::get('/product', [ProductController::class, 'showAll']);
+
+
+});
